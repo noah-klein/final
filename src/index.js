@@ -133,21 +133,23 @@ var App = React.createClass({
     }
   },
   componentDidMount: function() {
-    // We'll need to enter our Firebase configuration at the top of this file and
-    // un-comment this to make the Firebase database work
-    // base.syncState('/movies', { context: this, state: 'movies', asArray: true })
-  },
-  render: function() {
-    return (
-      <div>
-        <Header currentUser={this.state.currentUser} />
-        <SortBar movieCount={this.state.movies.length} viewChanged={this.viewChanged} />
-        <div className="main row">
-          {this.renderMainSection()}
-        </div>
-      </div>
-    )
-  }
+   base.syncState('/movies', {
+     context: this,
+     state: 'movies',
+     asArray: true
+   })
+ },
+ render: function() {
+   return (
+     <div>
+       <Header currentUser={this.state.currentUser} />
+       <SortBar movieCount={this.state.movies.length} currentView={this.state.currentView} viewChanged={this.viewChanged} />
+       <div className="main row">
+         {this.renderMainSection()}
+       </div>
+     </div>
+   )
+ }
 })
 
 ReactDOM.render(<App />, document.getElementById("app"))
